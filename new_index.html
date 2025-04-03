@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xyloweft | Educational VR Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #989da0;
+      --bg-color: #f8f9fa;
+      --text-color: #333333;
+      --card-bg: #ffffff;
+      --nav-bg: #ffffff;
+      --border-color: #e0e0e0;
+      --demo-bg: #f8f9fa;
+      --footer-bg: #2c3e50;
+    }
+
+    [data-theme="dark"] {
+      --primary-color: #e1dddc;
+      --secondary-color: #a0a0a0;
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --card-bg: #1e1e1e;
+      --nav-bg: #1e1e1e;
+      --border-color: #333333;
+      --demo-bg: #0a0a0a;
+      --footer-bg: #000000;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Space Mono', monospace;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .navbar {
+      background: var(--nav-bg) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      letter-spacing: 1px;
+    }
+
+    .nav-link {
+      color: var(--text-color);
+      font-weight: 500;
+      padding: 8px 15px !important;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary-color);
+    }
+
+    .carousel img {
+      height: 500px;
+      object-fit: cover;
+      filter: brightness(70%);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .card-text {
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100px;
+    }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+      width: 100%;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .btn-outline-dark {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 4px;
+    }
+
+    .btn-outline-dark:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .section-title {
+      color: var(--primary-color);
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary-color);
+    }
+
+    /* Demo section styling */
+    #demo {
+      background-color: var(--demo-bg);
+      transition: background-color 0.5s ease;
+    }
+
+    /* Footer styling */
+    .footer {
+      background: var(--footer-bg);
+      color: white;
+      padding: 40px 0;
+      transition: background-color 0.5s ease;
+    }
+
+    .footer .lead {
+      font-weight: 300;
+      margin-bottom: 25px;
+    }
+
+    .footer i {
+      font-size: 1.5rem;
+      margin: 0 10px;
+      color: white;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .footer i:hover {
+      transform: translateY(-5px);
+      color: var(--primary-color);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Scrollbar styling */
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: var(--secondary-color);
+      border-radius: 4px;
+    }
+
+    /* Back to top button */
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: #e0e0e0;
+      color: #333;
+      cursor: pointer;
+      padding: 12px;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      font-size: 18px;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    #scrollTopBtn:hover {
+      background-color: #d0d0d0;
+      transform: translateY(-3px);
+    }
+
+    /* Dark mode adjustments for the button */
+    [data-theme="dark"] #scrollTopBtn {
+      background-color: #444;
+      color: #f5f5f5;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="dark"] #scrollTopBtn:hover {
+      background-color: #555;
+    }
+    </style>
+  </head>
+
+  <body data-theme="light">
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand logo" href="#">Xyloweft</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#demo">Demo</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <li class="nav-item">
+              <i class="fas fa-moon theme-toggle ms-3" id="themeToggle"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Back to top button -->
+    <button id="scrollTopBtn" title="Go to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/unity.png" class="d-block w-100" alt="VR Education" />
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Innovative VR Learning Solutions</h2>
+            <p>Transforming complex concepts into interactive experiences</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/Houdini.png" class="d-block w-100" alt="Physics Visualization" />
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Visualize Abstract Concepts</h2>
+            <p>Making STEM education more accessible and engaging</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/p2.JPG" class="d-block w-100" alt="Future of Education" />
+          <div class="carousel-caption d-none d-md-block">
+            <h2>The Future of Education</h2>
+            <p>Preparing students for tomorrow's challenges</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <section class="container my-5 py-5" id="features">
+      <h2 class="text-center section-title">Our Solution</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card h-100">
+            <img src="images/p1.JPG" class="card-img-top" alt="Inspiration" />
+            <div class="card-body">
+              <h5 class="card-title">Inspiration</h5>
+              <p class="card-text">Addressing the challenges students face in STEM courses, we developed an innovative VR solution to transform abstract concepts into tangible, interactive visualizations, enhancing comprehension and retention.</p>
+              <a href="#contact" class="btn btn-outline-dark">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="images/p2.JPG" class="card-img-top" alt="Technology" />
+            <div class="card-body">
+              <h5 class="card-title">Technology</h5>
+              <p class="card-text">Our platform integrates voice recognition with real-time VR interactions, creating a seamless educational experience. We've optimized the system for intuitive use and maximum educational impact.</p>
+              <a href="#demo" class="btn btn-outline-dark">View Demo</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="images/p3.JPG" class="card-img-top" alt="Roadmap" />
+            <div class="card-body">
+              <h5 class="card-title">Roadmap</h5>
+              <p class="card-text">We're expanding our content library, enhancing voice control, and developing a Meta Quest application to make our solution widely accessible for students to learn anytime, anywhere.</p>
+              <a href="#contact" class="btn btn-outline-dark">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container my-5 py-5" id="demo">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="section-title">Experience Our Demo</h2>
+          <p class="lead">See how our VR educational platform transforms complex STEM concepts into interactive, visual experiences that enhance learning outcomes.</p>
+          <p>Our solution is designed to bridge the gap between theoretical knowledge and practical understanding, making abstract concepts tangible through immersive technology.</p>
+          <a href="#contact" class="btn btn-outline-dark mt-3">Request Full Demo</a>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/JldMvQMO_5U" title="Xyloweft Demo" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer text-center" id="contact">
+      <div class="container py-5">
+        <h2 class="mb-4">Xyloweft</h2>
+        <p class="lead">Transforming Education Through Immersive Technology</p>
+        <div class="mb-4">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <p>© 2023 Xyloweft. All rights reserved.</p>
+        <p class="mt-3"><a href="mailto:xyloweft@gmail.com" class="text-white">xyloweft@gmail.com</a></p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out'
+      });
+
+      // Scroll to top button
+      const scrollTopBtn = document.getElementById("scrollTopBtn");
+      window.onscroll = function() {
+        scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+      };
+      scrollTopBtn.onclick = function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      // Theme switching
+      const themeToggle = document.getElementById("themeToggle");
+      const body = document.body;
+      const savedTheme = localStorage.getItem("theme") || "light";
+      body.setAttribute("data-theme", savedTheme);
+      themeToggle.className = savedTheme === "dark" ? "fas fa-sun theme-toggle ms-3" : "fas fa-moon theme-toggle ms-3";
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = body.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        body.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        themeToggle.className = newTheme === "dark" ? "fas fa-sun theme-toggle ms-3" : "fas fa-moon theme-toggle ms-3";
+      });
+
+      // Close mobile menu when clicking a link
+      const navLinks = document.querySelectorAll(".nav-link");
+      const bsCollapse = new bootstrap.Collapse(document.getElementById("navbarNav"), { toggle: false });
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => bsCollapse.hide());
+      });
+    </script>
+  </body>
+</html>
